@@ -1,8 +1,6 @@
 from flask  import Flask, render_template, request
 import pandas as pd
 import pickle
-import warnings
-warnings.filterwarnings('ignore')
 
 app = Flask(__name__)
 
@@ -16,8 +14,6 @@ def Home():
 
 @app.route("/predict", methods=['POST'])
 def predict():
-
-    
     fuel_type = request.form['fuel_type']
     aspiration = request.form['aspiration']
     body_style = request.form['body-style']
@@ -48,7 +44,6 @@ def predict():
 
     volume = (length * width * height)
 
-
     data_dict = {'make':[make], 'fuel-type':[fuel_type], 'aspiration':[aspiration], 'num-of-doors':[num_of_doors], 
        'body-style':[body_style],'drive-wheels':[drive_wheels], 'engine-location':[engine_location], 'wheel-base':[wheel_base], 
        'curb-weight':[curb_weight],'engine-type':[engine_type] , 'num-of-cylinders':[num_of_cylinders], 'engine-size':[engine_size], 
@@ -61,6 +56,7 @@ def predict():
 
     price_prediction = autoprice_model.predict(X_user_transformed)
     predicted_value = round(price_prediction[0],2)
+    
     return render_template('autoprice.html',pred=predicted_value)
 
 if __name__ == '__main__':
