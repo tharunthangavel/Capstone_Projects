@@ -37,8 +37,11 @@ def predict():
     width = float(request.form['width'])
     height = float(request.form['height'])
 
-    if fuel_system == 'mfi' or 'spfi':
-        fuel_system = 'mpfi'
+    if fuel_system == 'mpfi':
+        fuel_system = 'mfi'
+    
+    if fuel_system == 'spdi':
+        fuel_system = 'spfi'
     
     bore_stroke_ratio = bore / stroke
 
